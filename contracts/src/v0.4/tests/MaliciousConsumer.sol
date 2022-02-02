@@ -41,7 +41,8 @@ contract MaliciousConsumer is Chainlinked {
   }
 
   function stealEthCall(bytes32 _requestId, bytes32) public recordChainlinkFulfillment(_requestId) {
-    require(payable(this).call{value: 100}(""), "Call failed"); // solhint-disable-line avoid-call-value
+    (bool success, ) = payable(this).call{value: 100}(""); // solhint-disable-line avoid-call-value
+    require(success, "Call failed");
   }
 
   function stealEthSend(bytes32 _requestId, bytes32) public recordChainlinkFulfillment(_requestId) {
