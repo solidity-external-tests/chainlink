@@ -263,7 +263,7 @@ contract Operator is AuthorizedReceiver, ConfirmedOwner, LinkTokenReceiver, Oper
     public
     validateAuthorizedSenderSetter
   {
-    TargetsUpdatedAuthorizedSenders(targets, senders, msg.sender);
+    emit TargetsUpdatedAuthorizedSenders(targets, senders, msg.sender);
 
     for (uint256 i = 0; i < targets.length; i++) {
       AuthorizedReceiverInterface(targets[i]).setAuthorizedSenders(senders);
