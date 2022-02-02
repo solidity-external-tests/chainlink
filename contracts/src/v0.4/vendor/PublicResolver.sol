@@ -176,7 +176,7 @@ contract PublicResolver {
     for (contentType = 1; contentType <= contentTypes; contentType <<= 1) {
       if ((contentType & contentTypes) != 0 && record.abis[contentType].length > 0) {
         data = record.abis[contentType];
-        return;
+        return (0, "");
       }
     }
     contentType = 0;
