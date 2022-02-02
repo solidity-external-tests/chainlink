@@ -63,7 +63,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable {
   function onTokenTransfer(
     address _sender,
     uint256 _amount,
-    bytes _data
+    bytes memory _data
   )
     public
     onlyLINK
@@ -99,7 +99,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable {
     bytes4 _callbackFunctionId,
     uint256 _nonce,
     uint256 _dataVersion,
-    bytes _data
+    bytes memory _data
   )
     external
     onlyLINK
@@ -290,7 +290,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable {
    * @dev Reverts if the given data does not begin with the `oracleRequest` function selector
    * @param _data The data payload of the request
    */
-  modifier permittedFunctionsForLINK(bytes _data) {
+  modifier permittedFunctionsForLINK(bytes memory _data) {
     bytes4 funcSelector;
     assembly { // solhint-disable-line no-inline-assembly
       funcSelector := mload(add(_data, 32))
@@ -312,7 +312,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable {
    * @dev Reverts if the given payload is less than needed to create a request
    * @param _data The request payload
    */
-  modifier validRequestLength(bytes _data) {
+  modifier validRequestLength(bytes memory _data) {
     require(_data.length >= MINIMUM_REQUEST_LENGTH, "Invalid request length");
     _;
   }

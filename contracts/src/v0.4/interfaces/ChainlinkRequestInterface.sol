@@ -9,7 +9,7 @@ interface ChainlinkRequestInterface {
     bytes4 callbackFunctionId,
     uint256 nonce,
     uint256 version,
-    bytes data
+    bytes memory data
   ) external;
 
   function cancelOracleRequest(

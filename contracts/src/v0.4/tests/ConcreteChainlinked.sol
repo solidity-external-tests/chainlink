@@ -21,7 +21,7 @@ contract ConcreteChainlinked is Chainlinked {
   function publicNewRequest(
     bytes32 _id,
     address _address,
-    bytes _fulfillmentSignature
+    bytes memory _fulfillmentSignature
   )
     public
   {
@@ -38,7 +38,7 @@ contract ConcreteChainlinked is Chainlinked {
   function publicRequest(
     bytes32 _id,
     address _address,
-    bytes _fulfillmentSignature,
+    bytes memory _fulfillmentSignature,
     uint256 _wei
   )
     public
@@ -52,7 +52,7 @@ contract ConcreteChainlinked is Chainlinked {
     address _oracle,
     bytes32 _id,
     address _address,
-    bytes _fulfillmentSignature,
+    bytes memory _fulfillmentSignature,
     uint256 _wei
   )
     public

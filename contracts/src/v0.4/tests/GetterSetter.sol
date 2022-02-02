@@ -23,12 +23,12 @@ contract GetterSetter {
     setBytes32(_value);
   }
 
-  function setBytes(bytes _value) public {
+  function setBytes(bytes memory _value) public {
     getBytes = _value;
     emit SetBytes(msg.sender, _value);
   }
 
-  function requestedBytes(bytes32 _requestId, bytes _value) public {
+  function requestedBytes(bytes32 _requestId, bytes memory _value) public {
     requestId = _requestId;
     setBytes(_value);
   }

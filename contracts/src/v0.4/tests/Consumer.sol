@@ -13,7 +13,7 @@ contract Consumer is ChainlinkClient {
     bytes32 indexed price
   );
 
-  function requestEthereumPrice(string _currency) public {
+  function requestEthereumPrice(string memory _currency) public {
     Chainlink.Request memory req = buildChainlinkRequest(specId, this, this.fulfill.selector);
     req.add("get", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,JPY");
     string[] memory path = new string[](1);

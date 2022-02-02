@@ -24,7 +24,7 @@ contract LinkToken is linkStandardToken, ERC677Token {
   * @param _value The amount to be transferred.
   * @param _data The extra data to be passed to the receiving contract.
   */
-  function transferAndCall(address _to, uint _value, bytes _data)
+  function transferAndCall(address _to, uint _value, bytes memory _data)
     public
     validRecipient(_to)
     returns (bool success)

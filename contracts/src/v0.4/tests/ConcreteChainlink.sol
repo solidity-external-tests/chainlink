@@ -16,31 +16,31 @@ contract ConcreteChainlink {
     emit RequestData(req.buf.buf);
   }
 
-  function setBuffer(bytes data) public {
+  function setBuffer(bytes memory data) public {
     Chainlink.Request memory r2 = req;
     r2.setBuffer(data);
     req = r2;
   }
 
-  function add(string _key, string _value) public {
+  function add(string memory _key, string memory _value) public {
     Chainlink.Request memory r2 = req;
     r2.add(_key, _value);
     req = r2;
   }
 
-  function addBytes(string _key, bytes _value) public {
+  function addBytes(string memory _key, bytes memory _value) public {
     Chainlink.Request memory r2 = req;
     r2.addBytes(_key, _value);
     req = r2;
   }
 
-  function addInt(string _key, int256 _value) public {
+  function addInt(string memory _key, int256 _value) public {
     Chainlink.Request memory r2 = req;
     r2.addInt(_key, _value);
     req = r2;
   }
 
-  function addUint(string _key, uint256 _value) public {
+  function addUint(string memory _key, uint256 _value) public {
     Chainlink.Request memory r2 = req;
     r2.addUint(_key, _value);
     req = r2;
@@ -48,7 +48,7 @@ contract ConcreteChainlink {
 
   // Temporarily have method receive bytes32[] memory until experimental
   // string[] memory can be invoked from truffle tests.
-  function addStringArray(string _key, bytes32[] memory _values) public {
+  function addStringArray(string memory _key, bytes32[] memory _values) public {
     string[] memory strings = new string[](_values.length);
     for (uint256 i = 0; i < _values.length; i++) {
       strings[i] = bytes32ToString(_values[i]);
@@ -58,7 +58,7 @@ contract ConcreteChainlink {
     req = r2;
   }
 
-  function bytes32ToString(bytes32 x) private pure returns (string) {
+  function bytes32ToString(bytes32 x) private pure returns (string memory) {
     bytes memory bytesString = new bytes(32);
     uint charCount = 0;
     for (uint j = 0; j < 32; j++) {

@@ -58,8 +58,8 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     address _link,
     uint128 _paymentAmount,
     uint128 _minimumResponses,
-    address[] _oracles,
-    bytes32[] _jobIds
+    address[] memory _oracles,
+    bytes32[] memory _jobIds
   ) public Ownable() {
     setChainlinkToken(_link);
     updateRequestDetails(_paymentAmount, _minimumResponses, _oracles, _jobIds);
@@ -124,8 +124,8 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
   function updateRequestDetails(
     uint128 _paymentAmount,
     uint128 _minimumResponses,
-    address[] _oracles,
-    bytes32[] _jobIds
+    address[] memory _oracles,
+    bytes32[] memory _jobIds
   )
     public
     onlyOwner()
@@ -406,8 +406,8 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
    */
   modifier validateAnswerRequirements(
     uint256 _minimumResponses,
-    address[] _oracles,
-    bytes32[] _jobIds
+    address[] memory _oracles,
+    bytes32[] memory _jobIds
   ) {
     require(_oracles.length <= MAX_ORACLE_COUNT, "cannot have more than 45 oracles");
     require(_oracles.length >= _minimumResponses, "must have at least as many oracles as responses");

@@ -48,7 +48,7 @@ library Chainlink {
    * @param self The initialized request
    * @param _data The CBOR data
    */
-  function setBuffer(Request memory self, bytes _data)
+  function setBuffer(Request memory self, bytes memory _data)
     internal pure
   {
     Buffer_Chainlink.init(self.buf, _data.length);
@@ -61,7 +61,7 @@ library Chainlink {
    * @param _key The name of the key
    * @param _value The string value to add
    */
-  function add(Request memory self, string _key, string _value)
+  function add(Request memory self, string memory _key, string memory _value)
     internal pure
   {
     self.buf.encodeString(_key);
@@ -74,7 +74,7 @@ library Chainlink {
    * @param _key The name of the key
    * @param _value The bytes value to add
    */
-  function addBytes(Request memory self, string _key, bytes _value)
+  function addBytes(Request memory self, string memory _key, bytes memory _value)
     internal pure
   {
     self.buf.encodeString(_key);
@@ -87,7 +87,7 @@ library Chainlink {
    * @param _key The name of the key
    * @param _value The int256 value to add
    */
-  function addInt(Request memory self, string _key, int256 _value)
+  function addInt(Request memory self, string memory _key, int256 _value)
     internal pure
   {
     self.buf.encodeString(_key);
@@ -100,7 +100,7 @@ library Chainlink {
    * @param _key The name of the key
    * @param _value The uint256 value to add
    */
-  function addUint(Request memory self, string _key, uint256 _value)
+  function addUint(Request memory self, string memory _key, uint256 _value)
     internal pure
   {
     self.buf.encodeString(_key);
@@ -113,7 +113,7 @@ library Chainlink {
    * @param _key The name of the key
    * @param _values The array of string values to add
    */
-  function addStringArray(Request memory self, string _key, string[] memory _values)
+  function addStringArray(Request memory self, string memory _key, string[] memory _values)
     internal pure
   {
     self.buf.encodeString(_key);
