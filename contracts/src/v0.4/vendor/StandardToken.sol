@@ -13,7 +13,7 @@ import { SafeMathChainlink as linkSafeMath } from "./SafeMathChainlink.sol";
  * @dev https://github.com/ethereum/EIPs/issues/20
  * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
  */
-contract StandardToken is linkERC20, linkBasicToken {
+abstract contract StandardToken is linkERC20, linkBasicToken {
   using linkSafeMath for uint256;
 
   mapping (address => mapping (address => uint256)) allowed;
@@ -25,7 +25,7 @@ contract StandardToken is linkERC20, linkBasicToken {
    * @param _to address The address which you want to transfer to
    * @param _value uint256 the amount of tokens to be transferred
    */
-  function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
+  function transferFrom(address _from, address _to, uint256 _value) public virtual override returns (bool) {
     uint _allowance = allowed[_from][msg.sender];
 
     // Check is not needed because sub(_allowance, _value) will already throw if this condition is not met
@@ -43,7 +43,7 @@ contract StandardToken is linkERC20, linkBasicToken {
    * @param _spender The address which will spend the funds.
    * @param _value The amount of tokens to be spent.
    */
-  function approve(address _spender, uint256 _value) public returns (bool) {
+  function approve(address _spender, uint256 _value) public virtual override returns (bool) {
     allowed[msg.sender][_spender] = _value;
     emit Approval(msg.sender, _spender, _value);
     return true;
@@ -55,7 +55,7 @@ contract StandardToken is linkERC20, linkBasicToken {
    * @param _spender address The address which will spend the funds.
    * @return remaining A uint256 specifying the amount of tokens still available for the spender.
    */
-  function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+  function allowance(address _owner, address _spender) public view override returns (uint256 remaining) {
     return allowed[_owner][_spender];
   }
   
@@ -65,7 +65,7 @@ contract StandardToken is linkERC20, linkBasicToken {
    * the first transaction is mined)
    * From MonolithDAO Token.sol
    */
-  function increaseApproval (address _spender, uint _addedValue) public
+  function increaseApproval (address _spender, uint _addedValue) public virtual
     returns (bool success) {
     allowed[msg.sender][_spender] = allowed[msg.sender][_spender].add(_addedValue);
     emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);

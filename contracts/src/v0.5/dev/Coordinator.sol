@@ -123,6 +123,7 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
     bytes memory _oracleSignaturesData
   )
     public
+    override
     returns (bytes32 serviceAgreementID)
   {
 
@@ -225,7 +226,7 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
   function fulfillOracleRequest(
     bytes32 _requestId,
     bytes32 _data
-  ) external isValidRequest(_requestId) returns (bool) {
+  ) external override isValidRequest(_requestId) returns (bool) {
     Callback memory callback = callbacks[_requestId];
     ServiceAgreement memory sA = serviceAgreements[callback.sAId];
     // solhint-disable-next-line avoid-low-level-calls

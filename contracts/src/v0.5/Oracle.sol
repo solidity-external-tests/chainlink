@@ -175,6 +175,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
    */
   function withdraw(address _recipient, uint256 _amount)
     external
+    override(OracleInterface, WithdrawalInterface)
     onlyOwner
     hasAvailableFunds(_amount)
   {
@@ -187,7 +188,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
    * @dev We use `ONE_FOR_CONSISTENT_GAS_COST` in place of 0 in storage
    * @return The amount of withdrawable LINK on the contract
    */
-  function withdrawable() external view onlyOwner returns (uint256) {
+  function withdrawable() external view override(OracleInterface, WithdrawalInterface) onlyOwner returns (uint256) {
     return withdrawableTokens.sub(ONE_FOR_CONSISTENT_GAS_COST);
   }
 
@@ -229,7 +230,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
    * @dev This is the public implementation for chainlinkTokenAddress, which is
    * an internal method of the ChainlinkClient contract
    */
-  function getChainlinkToken() public view returns (address) {
+  function getChainlinkToken() public view override returns (address) {
     return address(LinkToken);
   }
 

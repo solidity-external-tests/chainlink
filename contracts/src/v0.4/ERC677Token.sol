@@ -5,7 +5,7 @@ import "./interfaces/ERC677.sol";
 import "./interfaces/ERC677Receiver.sol";
 
 
-contract ERC677Token is ERC677 {
+abstract contract ERC677Token is ERC677 {
 
   /**
   * @dev transfer token to a contract address with additional data if the recipient is a contact.
@@ -15,6 +15,8 @@ contract ERC677Token is ERC677 {
   */
   function transferAndCall(address _to, uint _value, bytes memory _data)
     public
+    virtual
+    override
     returns (bool success)
   {
     super.transfer(_to, _value);

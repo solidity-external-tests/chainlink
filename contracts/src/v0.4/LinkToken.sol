@@ -3,11 +3,13 @@ pragma solidity ^0.4.11;
 
 import "./ERC677Token.sol";
 import { StandardToken as linkStandardToken } from "./vendor/StandardToken.sol";
+import { BasicToken } from "./vendor/BasicToken.sol";
+import { ERC20Basic } from "./interfaces/ERC20Basic.sol";
 
 
 contract LinkToken is linkStandardToken, ERC677Token {
 
-  uint public constant totalSupply = 10**27;
+  uint public constant override totalSupply = 10**27;
   string public constant name = "ChainLink Token";
   uint8 public constant decimals = 18;
   string public constant symbol = "LINK";
@@ -26,6 +28,7 @@ contract LinkToken is linkStandardToken, ERC677Token {
   */
   function transferAndCall(address _to, uint _value, bytes memory _data)
     public
+    override
     validRecipient(_to)
     returns (bool success)
   {
@@ -39,6 +42,7 @@ contract LinkToken is linkStandardToken, ERC677Token {
   */
   function transfer(address _to, uint _value)
     public
+    override(BasicToken, ERC20Basic)
     validRecipient(_to)
     returns (bool success)
   {
@@ -52,6 +56,7 @@ contract LinkToken is linkStandardToken, ERC677Token {
    */
   function approve(address _spender, uint256 _value)
     public
+    override(linkERC20, linkStandardToken)
     validRecipient(_spender)
     returns (bool)
   {
@@ -66,6 +71,7 @@ contract LinkToken is linkStandardToken, ERC677Token {
    */
   function transferFrom(address _from, address _to, uint256 _value)
     public
+    override(linkERC20, linkStandardToken)
     validRecipient(_to)
     returns (bool)
   {

@@ -11,7 +11,7 @@ pragma solidity ^0.5.0;
  *
  * This contract has been modified to remove the revokeOwnership function
  */
-contract Ownable {
+abstract contract Ownable {
   address private _owner;
 
   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
