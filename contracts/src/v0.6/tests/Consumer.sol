@@ -4,6 +4,8 @@ pragma solidity ^0.6.0;
 import "../ChainlinkClient.sol";
 
 contract Consumer is ChainlinkClient {
+  using Chainlink for Chainlink.Request;
+
   bytes32 internal specId;
   bytes32 public currentPrice;
 

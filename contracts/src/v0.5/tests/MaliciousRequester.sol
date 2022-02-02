@@ -5,6 +5,7 @@ import "./MaliciousChainlinkClient.sol";
 
 
 contract MaliciousRequester is MaliciousChainlinkClient {
+  using SafeMathChainlink for uint256;
 
   uint256 constant private ORACLE_PAYMENT = 1 * LINK;
   uint256 private expiration;

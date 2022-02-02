@@ -3,6 +3,7 @@ pragma solidity ^0.4.11;
 
 import { BasicToken as linkBasicToken } from "./BasicToken.sol";
 import { ERC20 as linkERC20 } from "../interfaces/ERC20.sol";
+import { SafeMathChainlink as linkSafeMath } from "./SafeMathChainlink.sol";
 
 
 /**
@@ -13,6 +14,7 @@ import { ERC20 as linkERC20 } from "../interfaces/ERC20.sol";
  * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
  */
 contract StandardToken is linkERC20, linkBasicToken {
+  using linkSafeMath for uint256;
 
   mapping (address => mapping (address => uint256)) allowed;
 

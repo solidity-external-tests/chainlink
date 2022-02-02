@@ -4,6 +4,7 @@ pragma solidity ^0.6.0;
 import "./Consumer.sol";
 
 contract GasGuzzlingConsumer is Consumer{
+  using Chainlink for Chainlink.Request;
 
   constructor(address _link, address _oracle, bytes32 _specId) public {
     setChainlinkToken(_link);
