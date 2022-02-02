@@ -99,7 +99,7 @@ contract DeviationFlaggingValidator is Owned, AggregatorValidatorInterface {
     if (_previousAnswer == 0) return true;
 
     (int256 change, bool changeOk) = _previousAnswer.sub(_answer);
-    (int256 ratioNumerator, bool numOk) = change.mul(THRESHOLD_MULTIPLIER);
+    (int256 ratioNumerator, bool numOk) = change.mul(int(uint(THRESHOLD_MULTIPLIER)));
     (int256 ratio, bool ratioOk) = ratioNumerator.div(_previousAnswer);
     (uint256 absRatio, bool absOk) = abs(ratio);
 

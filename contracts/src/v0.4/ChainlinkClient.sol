@@ -17,7 +17,7 @@ contract ChainlinkClient {
 
   uint256 constant internal LINK = 10**18;
   uint256 constant private AMOUNT_OVERRIDE = 0;
-  address constant private SENDER_OVERRIDE = 0x0;
+  address constant private SENDER_OVERRIDE = 0x0000000000000000000000000000000000000000;
   uint256 constant private ARGS_VERSION = 1;
   bytes32 constant private ENS_TOKEN_SUBNAME = keccak256("link");
   bytes32 constant private ENS_ORACLE_SUBNAME = keccak256("oracle");
@@ -61,7 +61,7 @@ contract ChainlinkClient {
     internal
     returns (bytes32)
   {
-    return sendChainlinkRequestTo(oracle, _req, _payment);
+    return sendChainlinkRequestTo(address(oracle), _req, _payment);
   }
 
   /**

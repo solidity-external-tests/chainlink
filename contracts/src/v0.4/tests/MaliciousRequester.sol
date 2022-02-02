@@ -20,7 +20,7 @@ contract MaliciousRequester is MaliciousChainlinked {
     public
   {
     MaliciousChainlink.WithdrawRequest memory req = newWithdrawRequest(
-      "specId", this, this.doesNothing.selector);
+      "specId", address(this), this.doesNothing.selector);
     chainlinkWithdrawRequest(req, ORACLE_PAYMENT);
   }
 
@@ -31,7 +31,7 @@ contract MaliciousRequester is MaliciousChainlinked {
   }
 
   function maliciousPrice(bytes32 _id) public returns (bytes32 requestId) {
-    Chainlink.Request memory req = newRequest(_id, this, this.doesNothing.selector);
+    Chainlink.Request memory req = newRequest(_id, address(this), this.doesNothing.selector);
     requestId = chainlinkPriceRequest(req, ORACLE_PAYMENT);
   }
 
@@ -43,7 +43,7 @@ contract MaliciousRequester is MaliciousChainlinked {
   function maliciousRequestCancel(bytes32 _id, bytes memory _callbackFunc) public {
     ChainlinkRequestInterface oracle = ChainlinkRequestInterface(oracleAddress());
     oracle.cancelOracleRequest(
-      request(_id, this, _callbackFunc),
+      request(_id, address(this), _callbackFunc),
       ORACLE_PAYMENT,
       this.maliciousRequestCancel.selector,
       expiration

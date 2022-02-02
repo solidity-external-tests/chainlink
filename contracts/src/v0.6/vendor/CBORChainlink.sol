@@ -54,9 +54,9 @@ library CBORChainlink {
     } else if(value > 0xFFFFFFFFFFFFFFFF) {
       encodeBigNum(buf, uint(value));
     } else if(value >= 0) {
-      encodeFixedNumeric(buf, MAJOR_TYPE_INT, uint64(value));
+      encodeFixedNumeric(buf, MAJOR_TYPE_INT, uint64(uint(value)));
     } else {
-      encodeFixedNumeric(buf, MAJOR_TYPE_NEGATIVE_INT, uint64(-1 - value));
+      encodeFixedNumeric(buf, MAJOR_TYPE_NEGATIVE_INT, type(uint64).max - uint64(uint(value)));
     }
   }
 

@@ -79,7 +79,7 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     uint256 oraclePayment = paymentAmount;
 
     for (uint i = 0; i < oracles.length; i++) {
-      request = buildChainlinkRequest(jobIds[i], this, this.chainlinkCallback.selector);
+      request = buildChainlinkRequest(jobIds[i], address(this), this.chainlinkCallback.selector);
       requestId = sendChainlinkRequestTo(oracles[i], request, oraclePayment);
       requestAnswers[requestId] = answerCounter;
     }
@@ -207,7 +207,7 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
   {
     LinkTokenInterface linkToken = LinkTokenInterface(chainlinkTokenAddress());
     transferLINK(owner, linkToken.balanceOf(address(this)));
-    selfdestruct(owner);
+    selfdestruct(payable(owner));
   }
 
   /**

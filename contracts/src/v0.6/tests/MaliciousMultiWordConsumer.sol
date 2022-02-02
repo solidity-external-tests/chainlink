@@ -36,22 +36,22 @@ contract MaliciousMultiWordConsumer is ChainlinkClient {
   }
 
   function remove() public {
-    selfdestruct(address(0));
+    selfdestruct(payable(0));
   }
 
   function stealEthCall(bytes32 _requestId, bytes memory) public recordChainlinkFulfillment(_requestId) {
-    (bool success,) = address(this).call.value(100)(""); // solhint-disable-line avoid-call-value
+    (bool success,) = payable(this).call.value(100)(""); // solhint-disable-line avoid-call-value
     require(success, "Call failed");
   }
 
   function stealEthSend(bytes32 _requestId, bytes memory) public recordChainlinkFulfillment(_requestId) {
     // solhint-disable-next-line check-send-result
-    bool success = address(this).send(100); // solhint-disable-line multiple-sends
+    bool success = payable(this).send(100); // solhint-disable-line multiple-sends
     require(success, "Send failed");
   }
 
   function stealEthTransfer(bytes32 _requestId, bytes memory) public recordChainlinkFulfillment(_requestId) {
-    address(this).transfer(100);
+    payable(this).transfer(100);
   }
 
   function doesNothing(bytes32, bytes memory) public pure {} // solhint-disable-line no-empty-blocks

@@ -99,8 +99,8 @@ contract PublicResolver {
    * @param name The name to set.
    */
   function setName(bytes32 node, bytes memory name) public only_owner(node) {
-    records[node].name = name;
-    emit NameChanged(node, name);
+    records[node].name = string(name);
+    emit NameChanged(node, string(name));
   }
 
   /**

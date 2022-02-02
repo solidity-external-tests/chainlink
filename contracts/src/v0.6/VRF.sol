@@ -266,7 +266,7 @@ contract VRF {
     bytes32 scalarTimesX = bytes32(mulmod(scalar, x, GROUP_ORDER));
     address actual = ecrecover(bytes32(0), v, bytes32(x), scalarTimesX);
     // Explicit conversion to address takes bottom 160 bits
-    address expected = address(uint256(keccak256(abi.encodePacked(product))));
+    address expected = address(uint160(uint256(keccak256(abi.encodePacked(product)))));
     return (actual == expected);
   }
 
