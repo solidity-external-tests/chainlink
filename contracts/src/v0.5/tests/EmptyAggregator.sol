@@ -10,7 +10,7 @@ contract EmptyAggregator {
 
   function initiateJob(
     bytes32 _saId, bytes memory _serviceAgreementData)
-    public returns (bool success, bytes memory _) {
+    public returns (bool success, bytes memory) {
       emit InitiatedJob(_saId);
       success = true;
     }
