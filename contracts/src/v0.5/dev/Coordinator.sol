@@ -116,7 +116,7 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
    * @notice Stores a Service Agreement which has been signed by the given oracles
    * @dev Validates that each oracle has a valid signature.
    * Emits NewServiceAgreement event.
-   * @return The Service Agreement ID
+   * @return serviceAgreementID The Service Agreement ID
    */
   function initiateServiceAgreement(
     bytes memory _serviceAgreementData,

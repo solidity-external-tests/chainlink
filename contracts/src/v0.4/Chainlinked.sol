@@ -45,7 +45,7 @@ contract Chainlinked is ChainlinkClient {
    * @param _oracle The address of the oracle for the request
    * @param _req The initialized Chainlink Request
    * @param _payment The amount of LINK to send for the request
-   * @return The request ID
+   * @return requestId The request ID
    */
   function chainlinkRequestTo(address _oracle, Chainlink.Request memory _req, uint256 _payment)
     internal
