@@ -98,7 +98,7 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
     callbacks[requestId].addr = _callbackAddress;
     callbacks[requestId].functionId = _callbackFunctionId;
     // solhint-disable-next-line not-rely-on-time
-    callbacks[requestId].cancelExpiration = uint64(now.add(EXPIRY_TIME));
+    callbacks[requestId].cancelExpiration = uint64(block.timestamp.add(EXPIRY_TIME));
 
     emit OracleRequest(
       _sAId,
@@ -107,7 +107,7 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
       _amount,
       _callbackAddress,
       _callbackFunctionId,
-      now.add(EXPIRY_TIME), // solhint-disable-line not-rely-on-time
+      block.timestamp.add(EXPIRY_TIME), // solhint-disable-line not-rely-on-time
       _dataVersion,
       _data);
   }

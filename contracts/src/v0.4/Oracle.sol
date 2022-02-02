@@ -108,7 +108,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable {
     bytes32 requestId = keccak256(abi.encodePacked(_sender, _nonce));
     require(commitments[requestId] == 0, "Must use a unique ID");
     // solhint-disable-next-line not-rely-on-time
-    uint256 expiration = now.add(EXPIRY_TIME);
+    uint256 expiration = block.timestamp.add(EXPIRY_TIME);
 
     commitments[requestId] = keccak256(
       abi.encodePacked(
@@ -242,7 +242,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable {
     );
     require(paramsHash == commitments[_requestId], "Params do not match request ID");
     // solhint-disable-next-line not-rely-on-time
-    require(_expiration <= now, "Request is not expired");
+    require(_expiration <= block.timestamp, "Request is not expired");
 
     delete commitments[_requestId];
     emit CancelOracleRequest(_requestId);

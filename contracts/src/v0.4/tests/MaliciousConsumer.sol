@@ -20,7 +20,7 @@ contract MaliciousConsumer is Chainlinked {
 
   function requestData(bytes32 _id, bytes memory _callbackFunc) public {
     Chainlink.Request memory req = newRequest(_id, this, bytes4(keccak256(_callbackFunc)));
-    expiration = now.add(5 minutes); // solhint-disable-line not-rely-on-time
+    expiration = block.timestamp.add(5 minutes); // solhint-disable-line not-rely-on-time
     chainlinkRequest(req, ORACLE_PAYMENT);
   }
 

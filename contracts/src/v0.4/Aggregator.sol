@@ -233,10 +233,10 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     }
     currentAnswerValue = currentAnswerTemp;
     latestCompletedAnswer = _answerId;
-    updatedTimestampValue = now;
-    updatedTimestamps[_answerId] = now;
+    updatedTimestampValue = block.timestamp;
+    updatedTimestamps[_answerId] = block.timestamp;
     currentAnswers[_answerId] = currentAnswerTemp;
-    emit AnswerUpdated(currentAnswerTemp, _answerId, now);
+    emit AnswerUpdated(currentAnswerTemp, _answerId, block.timestamp);
   }
 
   /**

@@ -26,7 +26,7 @@ contract MaliciousRequester is MaliciousChainlinked {
 
   function request(bytes32 _id, address _target, bytes memory _callbackFunc) public returns (bytes32 requestId) {
     Chainlink.Request memory req = newRequest(_id, _target, bytes4(keccak256(_callbackFunc)));
-    expiration = now.add(5 minutes); // solhint-disable-line not-rely-on-time
+    expiration = block.timestamp.add(5 minutes); // solhint-disable-line not-rely-on-time
     requestId = chainlinkRequest(req, ORACLE_PAYMENT);
   }
 

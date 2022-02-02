@@ -847,7 +847,7 @@ contract FluxAggregator is AggregatorV2V3Interface, Owned {
     rounds[_roundId].answeredInRound = _roundId;
     latestRoundId = _roundId;
 
-    emit AnswerUpdated(newAnswer, _roundId, now);
+    emit AnswerUpdated(newAnswer, _roundId, block.timestamp);
 
     return (true, newAnswer);
   }

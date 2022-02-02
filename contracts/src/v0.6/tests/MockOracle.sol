@@ -84,7 +84,7 @@ contract MockOracle is ChainlinkRequestInterface, LinkTokenReceiver {
     bytes32 requestId = keccak256(abi.encodePacked(_sender, _nonce));
     require(commitments[requestId].callbackAddr == address(0), "Must use a unique ID");
     // solhint-disable-next-line not-rely-on-time
-    uint256 expiration = now.add(EXPIRY_TIME);
+    uint256 expiration = block.timestamp.add(EXPIRY_TIME);
 
     commitments[requestId] = Request(
         _callbackAddress,
@@ -152,7 +152,7 @@ contract MockOracle is ChainlinkRequestInterface, LinkTokenReceiver {
   {
     require(commitments[_requestId].callbackAddr != address(0), "Must use a unique ID");
     // solhint-disable-next-line not-rely-on-time
-    require(_expiration <= now, "Request is not expired");
+    require(_expiration <= block.timestamp, "Request is not expired");
 
     delete commitments[_requestId];
     emit CancelOracleRequest(_requestId);
