@@ -16,7 +16,7 @@ contract MaliciousConsumer is Chainlinked {
     setOracle(_oracle);
   }
 
-  function () public payable {} // solhint-disable-line no-empty-blocks
+  fallback() external payable {} // solhint-disable-line no-empty-blocks
 
   function requestData(bytes32 _id, bytes _callbackFunc) public {
     Chainlink.Request memory req = newRequest(_id, this, bytes4(keccak256(_callbackFunc)));
