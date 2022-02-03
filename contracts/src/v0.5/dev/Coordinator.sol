@@ -227,12 +227,11 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
     bytes32 _requestId,
     bytes32 _data
   ) external override isValidRequest(_requestId) returns (bool) {
-    Callback memory callback = callbacks[_requestId];
-    ServiceAgreement memory sA = serviceAgreements[callback.sAId];
+    ServiceAgreement memory sA = serviceAgreements[callbacks[_requestId].sAId];
     // solhint-disable-next-line avoid-low-level-calls
     (bool ok, bytes memory aggResponse) = sA.aggregator.call(
       abi.encodeWithSelector(
-        sA.aggFulfillSelector, _requestId, callback.sAId, msg.sender, _data));
+        sA.aggFulfillSelector, _requestId, callbacks[_requestId].sAId, msg.sender, _data));
     require(ok, "aggregator.fulfill failed");
     require(aggResponse.length > 0, "probably wrong address/selector");
     (bool aggSuccess, bool aggComplete, bytes memory response, int256[] memory paymentAmounts) = abi.decode( // solhint-disable-line
@@ -244,8 +243,8 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
         withdrawableTokens[sA.oracles[oIdx]] = uint256(int256(
           withdrawableTokens[sA.oracles[oIdx]]) + paymentAmounts[oIdx]);
       } // solhint-disable-next-line avoid-low-level-calls
-      (bool success,) = callback.addr.call(abi.encodeWithSelector( // report final result
-        callback.functionId, _requestId, abi.decode(response, (bytes32))));
+      (bool success,) = callbacks[_requestId].addr.call(abi.encodeWithSelector( // report final result
+        callbacks[_requestId].functionId, _requestId, abi.decode(response, (bytes32))));
       return success;
     }
     return true;
