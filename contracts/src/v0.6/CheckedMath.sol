@@ -18,10 +18,12 @@ library CheckedMath {
     pure
     returns (int256 result, bool ok)
   {
-    int256 c = a + b;
-    if ((b >= 0 && c < a) || (b < 0 && c >= a)) return (0, false);
+    unchecked {
+      int256 c = a + b;
+      if ((b >= 0 && c < a) || (b < 0 && c >= a)) return (0, false);
 
-    return (c, true);
+      return (c, true);
+    }
   }
 
   /**
@@ -35,10 +37,12 @@ library CheckedMath {
     pure
     returns (int256 result, bool ok)
   {
-    int256 c = a - b;
-    if ((b < 0 && c <= a) || (b >= 0 && c > a)) return (0, false);
+    unchecked {
+      int256 c = a - b;
+      if ((b < 0 && c <= a) || (b >= 0 && c > a)) return (0, false);
 
-    return (c, true);
+      return (c, true);
+    }
   }
 
 
@@ -59,10 +63,12 @@ library CheckedMath {
     if (a == 0) return (0, true);
     if (a == -1 && b == INT256_MIN) return (0, false);
 
-    int256 c = a * b;
-    if (!(c / a == b)) return (0, false);
+    unchecked {
+      int256 c = a * b;
+      if (!(c / a == b)) return (0, false);
 
-    return (c, true);
+      return (c, true);
+    }
   }
 
   /**
@@ -79,9 +85,11 @@ library CheckedMath {
     if (b == 0) return (0, false);
     if (b == -1 && a == INT256_MIN) return (0, false);
 
-    int256 c = a / b;
+    unchecked {
+      int256 c = a / b;
 
-    return (c, true);
+      return (c, true);
+    }
   }
 
 }

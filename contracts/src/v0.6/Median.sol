@@ -200,6 +200,7 @@ library Median {
     pure
     returns (uint256)
   {
+    unchecked{
     // We don't care about overflow of the addition, because it would require a list
     // larger than any feasible computer's memory.
     int256 pivot = list[(lo + hi) / 2];
@@ -227,6 +228,7 @@ library Median {
         //   - (orig_lo + orig_hi)/2 < orig_hi
         return hi;
       }
+    }
     }
   }
 
