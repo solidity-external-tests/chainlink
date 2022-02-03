@@ -464,7 +464,7 @@ contract VRF {
       // taking the sum as they do in step 7 of section 5.1.)
       require(
         verifyLinearCombinationWithGenerator(c, pk, s, uWitness),
-        "addr(c*pk+s*g)≠_uWitness"
+        unicode"addr(c*pk+s*g)≠_uWitness"
       );
       // Step 4. of IETF draft section 5.3 (pk corresponds to Y, seed to alpha_string)
       uint256[2] memory hash = hashToCurve(pk, seed);
