@@ -187,7 +187,7 @@ abstract contract VRFConsumerBase is VRFRequestIDBase {
    *
    * @dev https://docs.chain.link/docs/link-token-contracts
    */
-  constructor(address _vrfCoordinator, address _link) public {
+  constructor(address _vrfCoordinator, address _link) {
     vrfCoordinator = _vrfCoordinator;
     LINK = LinkTokenInterface(_link);
   }
